@@ -1,0 +1,45 @@
+var config;
+(function (config) {
+    // font constants
+    config.FONT_FAMILY = "Consolas";
+    config.FONT_SMALL = "20px";
+    config.FONT_MEDIUM = "40px";
+    config.FONT_LARGE = "60px";
+    config.FONT_EXTRA_LARGE = "80px";
+    // colour constants
+    config.WHITE = "#FFFFFF";
+    config.BLACK = "#000000";
+    config.YELLOW = "#FFFF00";
+    config.RED = "#FF0000";
+    config.GREEN = "#00FF00";
+    config.BLUE = "#0000FF";
+    // state constants
+    config.MENU_STATE = 0;
+    config.INSTRUCTION_STATE = 1;
+    config.PLAY_STATE = 2;
+    config.GAME_OVER_STATE = 3;
+    // key constants
+    config.KEY_LEFT = 37;
+    config.KEY_RIGHT = 39;
+    config.KEY_UP = 38;
+    config.KEY_DOWN = 40;
+    config.KEY_SPACE = 32;
+    config.KEY_A = 65;
+    config.KEY_S = 83;
+    config.KEY_D = 68;
+    config.KEY_W = 87;
+    // control variables
+    config.FORWARD = false;
+    config.REVERSE = false;
+    config.TURN_LEFT = false;
+    config.TURN_RIGHT = false;
+    config.FIRING = false;
+    // avatar constants
+    config.PLAYER_FORWARD = 5;
+    config.PLAYER_SLIDE = 3;
+    config.PLAYER_REVERSE = 2;
+    config.PLAYER_TURN_RATE = 2;
+    // bullet constants
+    config.BULLET_SPEED = 10;
+})(config || (config = {}));
+//# sourceMappingURL=config.js.map
