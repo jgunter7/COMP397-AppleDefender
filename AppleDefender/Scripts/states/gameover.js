@@ -8,7 +8,6 @@ var states;
         // PUBLIC METHODS
         // update method
         GameOver.prototype.update = function () {
-            ocean.update();
         };
         GameOver.prototype.tryAgainClick = function (event) {
             this.destroy();
@@ -24,9 +23,6 @@ var states;
         GameOver.prototype.main = function () {
             // instantiate new game container
             game = new createjs.Container();
-            //add ocean object to stage
-            ocean = new objects.Ocean(assets.loader.getResult("ocean"));
-            game.addChild(ocean);
             // add Mail Pilot Label
             var label = new objects.Label("GAME OVER", config.FONT_EXTRA_LARGE, config.FONT_FAMILY, config.YELLOW, 320, 140);
             game.addChild(label);

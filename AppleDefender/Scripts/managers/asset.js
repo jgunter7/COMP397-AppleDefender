@@ -5,9 +5,12 @@ var managers;
         function Asset() {
             // PRIVATE PROPERTIES
             this.manifest = [
-                { id: "yay", src: "assets/audio/yay.ogg" },
-                { id: "thunder", src: "assets/audio/thunder.ogg" },
-                { id: "engine", src: "assets/audio/engine.ogg" }
+                { id: "loop", src: "assets/audio/bass_loop.wav" },
+                { id: "die", src: "assets/audio/die.wav" },
+                { id: "reload", src: "assets/audio/reload.mp3" },
+                { id: "shot", src: "assets/audio/shot.wav" },
+                { id: "wall_fall", src: "assets/audio/wall_fall.mp3" },
+                { id: "hit", src: "assets/audio/uh.wav" }
             ];
             this.data = {
                 "images": [

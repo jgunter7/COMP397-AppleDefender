@@ -26,36 +26,13 @@ var objects;
             var radians = this.direction * (Math.PI / 180);
             this.dx = this.speed * Math.cos(radians);
             this.dy = this.speed * Math.sin(radians);
-            this.dy *= -1;
+            //this.dy *= -1;
         };
         // Calculate the game object's new position
         GameObject.prototype.calcPosition = function () {
-            this.x += this.dx;
-            this.y += this.dy;
-        };
-        // Turn Left Method
-        GameObject.prototype.turnLeft = function () {
-            this.rotation -= this.turnRate;
-            this.direction += this.turnRate;
-            if (this.direction > 360) {
-                this.direction = this.turnRate;
-            }
-        };
-        // Turn Right Method
-        GameObject.prototype.turnRight = function () {
-            this.rotation += this.turnRate;
-            this.direction -= this.turnRate;
-            if (this.direction < 0) {
-                this.direction = 360 - this.turnRate;
-            }
-        };
-        // slide Left Method
-        GameObject.prototype.slideLeft = function () {
-            this.x -= config.PLAYER_SLIDE;
-        };
-        // slide Right Method
-        GameObject.prototype.slideRight = function () {
-            this.x += config.PLAYER_SLIDE;
+            this.x -= this.dx;
+            this.y -= this.dy;
+            this.rotation = this.direction;
         };
         return GameObject;
     })(createjs.Sprite);

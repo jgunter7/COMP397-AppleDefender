@@ -11,9 +11,12 @@
     <!-- CSS Section -->
     <link href="css/main.css" rel="stylesheet" />
 </head>
-<body onload="preload();">
+<body onload="preload();" style="background-color:grey;">
     <!-- Game Container -->
-    <canvas id="canvas" width="1280" height="720"></canvas>
+    <center>
+        <h1>Apple Defender</h1>
+        <canvas id="canvas" width="1280" height="720" style="background-color:white;"></canvas>
+    </center>
 
     <!-- JavaScript Section -->
     <script src="Scripts/lib/Stats.js"></script>
@@ -25,16 +28,17 @@
     <!-- Game Objects -->
     <script src="Scripts/config/config.js"></script>
     <script src="Scripts/managers/asset.js"></script>
+    <script src="Scripts/managers/bullet.js"></script>
+    <script src="Scripts/managers/collision.js"></script>
 
     <script src="Scripts/objects/gameobject.js"></script>
     <script src="Scripts/objects/bullet.js"></script>
+    <script src="Scripts/objects/gun.js"></script>
+    <script src="Scripts/objects/image.js"></script>
 
     <script src="Scripts/objects/scoreboard.js"></script>
     <script src="Scripts/objects/button.js"></script>
     <script src="Scripts/objects/label.js"></script>
-
-    <script src="Scripts/managers/bullet.js"></script>
-    <script src="Scripts/managers/collision.js"></script>
 
     <script src="Scripts/states/gameover.js"></script>
     <script src="Scripts/states/play.js"></script>

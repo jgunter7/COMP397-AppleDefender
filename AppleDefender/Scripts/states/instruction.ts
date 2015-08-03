@@ -11,8 +11,7 @@
         // PUBLIC METHODS
         // update method
         public update() {
-            avatar.update();
-            bulletManager.update();
+
         }
 
         // destroy method
@@ -27,9 +26,6 @@
         game = new createjs.Container();
 
         // instantiate avatar and add it to the game container
-        avatar = new objects.Avatar("spaceship");
-        game.addChild(avatar);
-
 
         // instantiate my bullet manager object
         bulletManager = new managers.BulletManager();

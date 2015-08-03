@@ -8,8 +8,6 @@ var states;
         // PUBLIC METHODS
         // update method
         Menu.prototype.update = function () {
-            //ocean.update();
-            plane.update();
         };
         Menu.prototype.playClick = function (event) {
             this.destroy();
@@ -19,7 +17,7 @@ var states;
         };
         // destroy method
         Menu.prototype.destroy = function () {
-            plane.engineSound.stop();
+            //plane.engineSound.stop();
             game.removeAllChildren();
         };
         // main method
@@ -29,9 +27,6 @@ var states;
             //add ocean object to stage
             //ocean = new objects.Ocean(assets.loader.getResult("ocean"));
             //game.addChild(ocean);
-            // add plane object to stage
-            plane = new objects.Plane("gun");
-            game.addChild(plane);
             // add Mail Pilot Label
             var label = new objects.Label("Mail Pilot", config.FONT_EXTRA_LARGE, config.FONT_FAMILY, config.YELLOW, 320, 140);
             game.addChild(label);

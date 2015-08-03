@@ -12,9 +12,7 @@
         // PUBLIC METHODS
         // update method
         public update() {
-            //ocean.update();
 
-            plane.update();
         }
 
         public playClick(event: createjs.MouseEvent) {
@@ -26,7 +24,7 @@
 
         // destroy method
         public destroy() {
-            plane.engineSound.stop();
+            //plane.engineSound.stop();
             game.removeAllChildren();
         }
 
@@ -38,10 +36,6 @@
             //add ocean object to stage
             //ocean = new objects.Ocean(assets.loader.getResult("ocean"));
             //game.addChild(ocean);
-
-            // add plane object to stage
-            plane = new objects.Plane("gun");
-            game.addChild(plane);
 
             // add Mail Pilot Label
             var label: objects.Label = new objects.Label("Mail Pilot", config.FONT_EXTRA_LARGE, config.FONT_FAMILY, config.YELLOW, 320, 140);

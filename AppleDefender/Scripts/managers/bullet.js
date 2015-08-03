@@ -11,13 +11,14 @@ var managers;
         // PRIVATE METHODS +++++++++++++++++++++++++++++++++++++++++++++++++++++
         // BULLET FIRE METHOD
         BulletManager.prototype._fire = function () {
-            // create two bullets on either side of  plane
+            // fire bullet from the gun
             var bullet = new objects.Bullet();
             game.addChild(bullet);
             bullet.init();
             this._bullets.push(bullet);
             // Play Bullet Sound
-            // createjs.Sound.play("bullet");
+            createjs.Sound.play("shot");
+            config.FIRING = false;
         }; // end fire
         // BULLET DESTROY METHOD
         BulletManager.prototype._destroyBullet = function (bullet) {
@@ -36,7 +37,7 @@ var managers;
                 this._destroyBullet(bullet);
             }
             // check to see if the bullet has left the bottom of the stage
-            if (bullet.y > 480) {
+            if (bullet.y > 720) {
                 this._destroyBullet(bullet);
             }
             // check to see if the bullet has left the left side of the stage
@@ -44,7 +45,7 @@ var managers;
                 this._destroyBullet(bullet);
             }
             // check to see if the bullet has left the right side of the stage
-            if (bullet.x > 640) {
+            if (bullet.x > 1280) {
                 this._destroyBullet(bullet);
             }
         };

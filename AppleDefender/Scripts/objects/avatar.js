@@ -75,13 +75,9 @@ var objects;
         Avatar.prototype._controlAction = function () {
             // Execute turn left
             if (config.TURN_LEFT) {
-                this.turnLeft();
-                this.slideLeft();
             }
             // Execute turn right
             if (config.TURN_RIGHT) {
-                this.turnRight();
-                this.slideRight();
             }
             // Forward Movement
             if (config.FORWARD) {

@@ -16,14 +16,15 @@ var objects;
         }
         // PUBLIC METHODS
         Bullet.prototype.init = function () {
-            this.direction = avatar.direction;
+            this.direction = gunner.direction;
             this.speed = config.BULLET_SPEED;
-            this.x = avatar.x;
-            this.y = avatar.y;
+            this.x = gunner.x;
+            this.y = gunner.y;
         };
         Bullet.prototype.update = function () {
             this.calcVector();
             this.calcPosition();
+            //collision.check(new objects.GameObject);
         };
         return Bullet;
     })(objects.GameObject);

@@ -35,8 +35,11 @@ var game: createjs.Container;
 
 
 // Game Variables
-var gun: objects.Gun;
-var clouds: objects.Cloud[] = [];
+var gunner: objects.Gun;
+var grass: objects.Image;
+var grass2: objects.Image;
+var bgToolBar: objects.Image;
+var wall: objects.Image;
 
 var scoreboard: objects.ScoreBoard;
 var score: number = 0;
@@ -51,7 +54,7 @@ var collision: managers.Collision;
 var currentStateFunction; // state alias
 var currentState: number;
 var gameOver: states.GameOver;
-var level2: states.Level2;
+var instructions: states.Instruction;
 var play: states.Play;
 var menu: states.Menu;
 
@@ -60,7 +63,6 @@ var menu: states.Menu;
 function preload() {
     // instantiate asset manager class
     assets = new managers.Asset();
-
 
     //Setup statistics object
     setupStats();
@@ -75,7 +77,7 @@ function init() {
     createjs.Ticker.on("tick", gameLoop); 
 
     // set the current state
-    currentState = config.MENU_STATE;
+    currentState = config.PLAY_STATE;
 
     // calling main game function
     changeState();
@@ -88,7 +90,7 @@ function setupStats() {
 
     // align bottom-right
     stats.domElement.style.position = 'absolute';
-    stats.domElement.style.left = '650px';
+    stats.domElement.style.left = '10px';
     stats.domElement.style.top = '10px';
 
     document.body.appendChild(stats.domElement);
@@ -120,14 +122,14 @@ function changeState() {
             currentStateFunction = menu;
             break;
         case config.INSTRUCTION_STATE:
+            // instantiate instruction state;
+            instructions = new states.Instruction();
+            currentStateFunction = instructions;
             break;
         case config.PLAY_STATE:
             // instantiate play state;
-            level2 = new states.Level2();
-            currentStateFunction = level2;
-
-            //play = new states.Play();
-            //currentStateFunction = play;
+            play = new states.Play();
+            currentStateFunction = play;
             break;
         case config.GAME_OVER_STATE:
             // instantiate game over state;

@@ -4,22 +4,16 @@
 /// <reference path="typings/soundjs/soundjs.d.ts" />
 /// <reference path="typings/preloadjs/preloadjs.d.ts" />
 /// <reference path="config/config.ts" />
-/// <reference path="utility/utility.ts" />
 /// <reference path="managers/asset.ts" />
 /// <reference path="objects/gameobject.ts" />
-/// <reference path="objects/ocean.ts" />
-/// <reference path="objects/avatar.ts" />
 /// <reference path="objects/bullet.ts" />
-/// <reference path="objects/plane.ts" />
-/// <reference path="objects/island.ts" />
-/// <reference path="objects/cloud.ts" />
 /// <reference path="objects/scoreboard.ts" />
 /// <reference path="objects/button.ts" />
 /// <reference path="objects/label.ts" />
 /// <reference path="managers/bullet.ts" />
 /// <reference path="managers/collision.ts" />
+/// <reference path="states/instruction.ts" />
 /// <reference path="states/gameover.ts" />
-/// <reference path="states/level2.ts" />
 /// <reference path="states/play.ts" />
 /// <reference path="states/menu.ts" />
 // on branch atlas
@@ -29,11 +23,11 @@ var stage;
 var stats;
 var game;
 // Game Variables
-var ocean;
-var plane;
-var avatar;
-var island;
-var clouds = [];
+var gunner;
+var grass;
+var grass2;
+var bgToolBar;
+var wall;
 var scoreboard;
 var score = 0;
 // Game Managers
@@ -44,7 +38,7 @@ var collision;
 var currentStateFunction; // state alias
 var currentState;
 var gameOver;
-var level2;
+var instructions;
 var play;
 var menu;
 // Preloader Function
@@ -62,7 +56,7 @@ function init() {
     // event listener triggers 60 times every second
     createjs.Ticker.on("tick", gameLoop);
     // set the current state
-    currentState = config.MENU_STATE;
+    currentState = config.PLAY_STATE;
     // calling main game function
     changeState();
 }
@@ -72,7 +66,7 @@ function setupStats() {
     stats.setMode(0); // set to fps
     // align bottom-right
     stats.domElement.style.position = 'absolute';
-    stats.domElement.style.left = '650px';
+    stats.domElement.style.left = '10px';
     stats.domElement.style.top = '10px';
     document.body.appendChild(stats.domElement);
 }
@@ -95,13 +89,14 @@ function changeState() {
             currentStateFunction = menu;
             break;
         case config.INSTRUCTION_STATE:
+            // instantiate instruction state;
+            instructions = new states.Instruction();
+            currentStateFunction = instructions;
             break;
         case config.PLAY_STATE:
             // instantiate play state;
-            level2 = new states.Level2();
-            currentStateFunction = level2;
-            //play = new states.Play();
-            //currentStateFunction = play;
+            play = new states.Play();
+            currentStateFunction = play;
             break;
         case config.GAME_OVER_STATE:
             // instantiate game over state;

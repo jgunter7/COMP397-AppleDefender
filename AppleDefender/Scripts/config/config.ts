@@ -48,6 +48,6 @@
     export const PLAYER_TURN_RATE: number = 2;
 
     // bullet constants
-    export const BULLET_SPEED: number = 10;
+    export const BULLET_SPEED: number = 30;
     
 } 

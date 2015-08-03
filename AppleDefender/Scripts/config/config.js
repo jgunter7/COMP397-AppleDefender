@@ -40,6 +40,6 @@ var config;
     config.PLAYER_REVERSE = 2;
     config.PLAYER_TURN_RATE = 2;
     // bullet constants
-    config.BULLET_SPEED = 10;
+    config.BULLET_SPEED = 30;
 })(config || (config = {}));
 //# sourceMappingURL=config.js.map

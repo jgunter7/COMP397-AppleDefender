@@ -12,7 +12,6 @@
         // PUBLIC METHODS
         // update method
         public update() {
-            ocean.update();
 
         }
 
@@ -32,10 +31,6 @@
         public main() {
             // instantiate new game container
             game = new createjs.Container();
-
-            //add ocean object to stage
-            ocean = new objects.Ocean(assets.loader.getResult("ocean"));
-            game.addChild(ocean);
 
             // add Mail Pilot Label
             var label: objects.Label = new objects.Label("GAME OVER", config.FONT_EXTRA_LARGE,config.FONT_FAMILY, config.YELLOW, 320, 140);
