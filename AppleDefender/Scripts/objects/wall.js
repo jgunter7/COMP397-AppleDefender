@@ -6,37 +6,23 @@ var __extends = this.__extends || function (d, b) {
 };
 var objects;
 (function (objects) {
-    // Cloud Class ++++++++++++++++++++++++++++++++++++++
-    var Cloud = (function (_super) {
-        __extends(Cloud, _super);
+    // Plane Class ++++++++++++++++++++++++++++++++++++++
+    var Wall = (function (_super) {
+        __extends(Wall, _super);
         // CONSTRUCTOR ++++++++++++++++++++++++++++++++++
-        function Cloud(imageString) {
+        function Wall(imageString) {
             _super.call(this, imageString);
-            this.name = "cloud";
-            this.sound = "thunder";
-            this.reset();
+            this.sound = "wall_fall";
+            this.name = "wall";
         }
-        // PRIVATE METHODS ++++++++++++++++++++++++++++++
-        Cloud.prototype.checkBounds = function () {
-            // check if cloud has left screen
-            if (this.y > 480 + this.height) {
-                this.reset();
-            }
-        };
-        Cloud.prototype.reset = function () {
-            this.x = Math.floor(Math.random() * 640); // start cloud at random location
-            this.y = -this.height; // start cloud off stage
-            this.dy = Math.floor(Math.random() * 5) + 5;
-            this.dx = Math.floor(Math.random() * 4) - 2;
-        };
         // PUBLIC METHODS +++++++++++++++++++++++++++++++
-        Cloud.prototype.update = function () {
-            this.y += this.dy; // moves cloud down the stage
-            this.x += this.dx; // drifts cloud right and left
-            this.checkBounds();
+        Wall.prototype.SetUpWall = function (x, y, h) {
+            this.x = x;
+            this.y = y;
+            this.health = h;
         };
-        return Cloud;
+        return Wall;
     })(objects.GameObject);
-    objects.Cloud = Cloud;
+    objects.Wall = Wall;
 })(objects || (objects = {}));
 //# sourceMappingURL=wall.js.map

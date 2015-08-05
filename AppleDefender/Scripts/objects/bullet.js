@@ -22,9 +22,24 @@ var objects;
             this.y = gunner.y;
         };
         Bullet.prototype.update = function () {
+            this.CheckCollision();
             this.calcVector();
             this.calcPosition();
-            //collision.check(new objects.GameObject);
+        };
+        Bullet.prototype.CheckCollision = function () {
+            for (var apple = 0; apple < apples.length; apple++) {
+                if (this.getTransformedBounds().intersects(apples[apple].getTransformedBounds())) {
+                    apples[apple].health--;
+                    this.destroy();
+                    if (apples[apple].health > 0)
+                        createjs.Sound.play(apples[apple].sound);
+                    else
+                        apples[apple].DestroyApple();
+                }
+            }
+        };
+        Bullet.prototype.destroy = function () {
+            bulletManager._destroyBullet(this);
         };
         return Bullet;
     })(objects.GameObject);

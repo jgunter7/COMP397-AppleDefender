@@ -28,6 +28,7 @@ var grass;
 var grass2;
 var bgToolBar;
 var wall;
+var apples = [];
 var scoreboard;
 var score = 0;
 // Game Managers

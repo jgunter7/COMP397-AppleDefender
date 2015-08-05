@@ -9,6 +9,7 @@ var objects;
     // Plane Class ++++++++++++++++++++++++++++++++++++++
     var Gun = (function (_super) {
         __extends(Gun, _super);
+        // PUBLIC PROPERTIES +++++++++++++++++++++++++++
         // CONSTRUCTOR ++++++++++++++++++++++++++++++++++
         function Gun(imageString) {
             _super.call(this, imageString);

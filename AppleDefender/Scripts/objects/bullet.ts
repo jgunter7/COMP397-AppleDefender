@@ -17,9 +17,25 @@
         }
 
         update() {
+            this.CheckCollision();
             this.calcVector();
             this.calcPosition();
-            //collision.check(new objects.GameObject);
+        }
+
+        private CheckCollision() {
+            for (var apple = 0; apple < apples.length; apple++) {
+                if (this.getTransformedBounds().intersects(apples[apple].getTransformedBounds())) {
+                    apples[apple].health--; 
+                    this.destroy();
+                    if (apples[apple].health > 0)
+                        createjs.Sound.play(apples[apple].sound);
+                    else apples[apple].DestroyApple();
+                }
+            }    
+        }
+
+        private destroy() {
+            bulletManager._destroyBullet(this);
         }
     }
 } 

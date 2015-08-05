@@ -39,7 +39,8 @@ var gunner: objects.Gun;
 var grass: objects.Image;
 var grass2: objects.Image;
 var bgToolBar: objects.Image;
-var wall: objects.Image;
+var wall: objects.Wall;
+var apples: objects.Apple[] = [];
 
 var scoreboard: objects.ScoreBoard;
 var score: number = 0;
@@ -137,10 +138,6 @@ function changeState() {
             currentStateFunction = gameOver;
             break;
     }
-
-
-
-
 
     //add game container to stage
     stage.addChild(game);

@@ -13,6 +13,9 @@
         public update() {
             gunner.update();
             bulletManager.update();
+            for (var apple = 0; apple < apples.length; apple++) {
+                apples[apple].update();
+            }    
         }
 
         // destroy method
@@ -54,8 +57,8 @@
             // add wall type...
                     //wall = new objects.Image("brick_wall");
                     //wall = new objects.Image("steel_wall");
-            wall = new objects.Image("wood_wall");
-            wall.SetPosition(canvas.clientWidth * 0.75, 0);
+            wall = new objects.Wall("wood_wall");
+            wall.SetUpWall(canvas.clientWidth * 0.75, 0, 1000);
             wall.scaleY = 1.5;
             wall.alpha = 0.8;
             game.addChild(wall);
@@ -70,13 +73,15 @@
             gunner = new objects.Gun("gun");
             gunner.scaleX = gunner.scaleY = Math.min(180 / gunner.width, 180 / gunner.height);
             game.addChild(gunner);
-
-            // add 3 cloud objects to stage
-            //for (var cloud = 0; cloud < 3; cloud++) {
-            //    clouds[cloud] = new objects.Cloud("cloud");
-            //    game.addChild(clouds[cloud]);
-            //}
-
+            
+            //add apples to game
+            for (var apple = 0; apple < 30; apple++) {
+                apples[apple] = new objects.Apple("apple");
+                apples[apple].SetUpApple(3, config.APPLE_SPEED1);
+                apples[apple].scaleX = 0.4;
+                apples[apple].scaleY = 0.4;
+                game.addChild(apples[apple]);
+            }             
 
             //add scoreboard
             scoreboard = new objects.ScoreBoard();

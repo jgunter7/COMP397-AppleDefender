@@ -37,7 +37,7 @@ var managers;
                 this._destroyBullet(bullet);
             }
             // check to see if the bullet has left the bottom of the stage
-            if (bullet.y > 720) {
+            if (bullet.y > 520) {
                 this._destroyBullet(bullet);
             }
             // check to see if the bullet has left the left side of the stage

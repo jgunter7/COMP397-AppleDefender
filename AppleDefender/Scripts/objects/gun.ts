@@ -2,7 +2,6 @@
     // Plane Class ++++++++++++++++++++++++++++++++++++++
     export class Gun extends objects.GameObject {
         // PUBLIC PROPERTIES +++++++++++++++++++++++++++
-        gunshotSound: createjs.AbstractSoundInstance;
         // CONSTRUCTOR ++++++++++++++++++++++++++++++++++
         constructor(imageString: string) {
             super(imageString);

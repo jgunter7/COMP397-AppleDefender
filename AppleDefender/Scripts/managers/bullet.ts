@@ -26,7 +26,7 @@
         } // end fire
 
         // BULLET DESTROY METHOD
-        private _destroyBullet(bullet: objects.Bullet) {
+        public _destroyBullet(bullet: objects.Bullet) {
             var len: number = this._bullets.length;
 
             // remove bullet from game and from bullet array
@@ -45,7 +45,7 @@
             }
 
              // check to see if the bullet has left the bottom of the stage
-            if (bullet.y > 720) {
+            if (bullet.y > 520) {
                 this._destroyBullet(bullet);
             }
 
