@@ -5,6 +5,8 @@ var states;
         function Play() {
             this.wallType = "wood";
             this.wallCost = 1000;
+            this.reloadCost = 1000;
+            this.clipCost = 1000;
             this.wave = 1;
             this.main();
         }

@@ -94,6 +94,9 @@
         } // end update
 
         private ReloadGun() {
+            const loopLength = 1; // in seconds
+            var loopTimes = (gunner.reloadTime / loopLength) - 1;
+            createjs.Sound.play("reload", { loop: loopTimes });
             this.reload = true;
             this.waitTime = 0;
             config.FIRING = false;

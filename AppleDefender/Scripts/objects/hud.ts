@@ -47,7 +47,17 @@
             btnUpgradeWall.x = 960;
             btnUpgradeWall.y = 615;
             btnUpgradeWall.on("click", this.btnUpgradeWall_Click);
+            btnUpgradeRTime = new objects.Button("upgrade");
+            btnUpgradeRTime.x = 760;
+            btnUpgradeRTime.y = 615;
+            btnUpgradeRTime.on("click", this.btnUpgradeRTime_Click);
+            btnUpgradeClip = new objects.Button("upgrade");
+            btnUpgradeClip.x = 760;
+            btnUpgradeClip.y = 680;
+            btnUpgradeClip.on("click", this.btnUpgradeClip_Click);
             // Add game buttons
+            game.addChild(btnUpgradeClip);
+            game.addChild(btnUpgradeRTime);
             game.addChild(btnPause);
             game.addChild(btnQuit);
             game.addChild(btnReload);
@@ -88,9 +98,6 @@
         }
 
         private btnReload_Click() {
-            const loopLength = 1; // in seconds
-            var loopTimes = (gunner.reloadTime / loopLength) - 1;
-            createjs.Sound.play("reload", { loop: loopTimes});
             gunner.clip = 1; // forces a reload, cant seem to stop bullet being deployed onclick.
             game.removeChild(btnReload); // removes reload button while a reload is performed.
         }
@@ -105,6 +112,23 @@
                     if (money >= 2500)
                         play.UpgradeWall();
                     break;
+            }
+        }
+
+        private btnUpgradeRTime_Click() {
+            if (money >= play.reloadCost) {
+                gunner.reloadTime--;
+                money -= play.reloadCost;
+                play.reloadCost += 1000;
+            }
+        }
+
+        private btnUpgradeClip_Click() {
+            if (money >= play.clipCost) {
+                gunner.maxClip += 10;
+                gunner.clip = gunner.maxClip;
+                money -= play.clipCost;
+                play.clipCost += 1000;
             }
         }
     }

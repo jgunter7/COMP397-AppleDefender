@@ -2,6 +2,8 @@
     export class Play {
         public wallType = "wood";
         public wallCost: number = 1000;
+        public reloadCost: number = 1000;
+        public clipCost: number = 1000;
         public wave: number = 1;
 
         //CONSTRUCTOR
