@@ -1,6 +1,7 @@
 ﻿module states {
     export class Play {
         public wallType = "wood";
+        public wallCost: number = 1000;
         public wave: number = 1;
 
         //CONSTRUCTOR
@@ -23,8 +24,8 @@
                     this.NextWave();
                 }
                 wall.update();
-                hud.update();
             }
+            hud.update();
         }
 
         // destroy method
@@ -97,7 +98,8 @@
                 apples[apple].scaleX = 0.4;
                 apples[apple].scaleY = 0.4;
                 game.addChild(apples[apple]);
-            }    
+            } 
+            hud.btnPause_Click();   
         }
 
         public GameOver() {
@@ -107,7 +109,7 @@
         }
 
         private getNumApples(): number {
-            var num = this.wave * 5;
+            var num = this.wave * 10;
             return num;
         }
 
@@ -127,10 +129,13 @@
                 case "wood":
                     this.wallType = "brick";
                     this.CreateWall("brick_wall", 2500);
+                    money -= 1000;
                     break;
                 case "brick":
                     this.wallType = "steel";
                     this.CreateWall("steel_wall", 5000);
+                    money -= 2500;
+                    game.removeChild(btnUpgradeWall);
                     break;
             }
         }
@@ -139,9 +144,11 @@
         private CreateWall(stringData: string, health: number) {
             wall = new objects.Wall(stringData);
             wall.SetUpWall(canvas.clientWidth * 0.75, 0, health);
-            wall.scaleY = 1.5;
+            wall.scaleY = 1.47; // exact to avoid overlap when re-drawn.
             wall.alpha = 0.8;
             game.addChild(wall);
+            game.removeChild(gunner);
+            game.addChild(gunner);
         }
     }
 } 

@@ -13,7 +13,8 @@ var objects;
         function Gun(imageString) {
             _super.call(this, imageString);
             // PUBLIC PROPERTIES +++++++++++++++++++++++++++
-            this.clip = 30;
+            this.maxClip = 10;
+            this.clip = 10;
             this.reloadTime = 5;
             this.sound = "shot";
             this.y = (canvas.clientHeight / 2) - (this.getBounds().height);

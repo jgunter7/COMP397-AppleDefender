@@ -21,8 +21,8 @@
             this.speed = speed;
             //y = between 0 and 520 - height
             //x = -width and -500
-            this.y = Math.floor(Math.random() * (520 - 0 + 1)) + 0;
-            this.x = -1 * (Math.floor(Math.random() * (this.getTransformedBounds().width - 500 + 1)) + 500);
+            this.y = Math.floor(Math.random() * (520 - 5 + 1)) + 5;
+            this.x = -1 * (Math.floor(Math.random() * (5000 - 500 + 1)) + 500);
         }
 
         public update(): void { 

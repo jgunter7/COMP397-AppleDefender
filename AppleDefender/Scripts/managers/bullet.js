@@ -83,7 +83,7 @@ var managers;
         };
         BulletManager.prototype.CheckReloadDone = function () {
             if (60 * gunner.reloadTime == this.waitTime) {
-                gunner.clip = 30;
+                gunner.clip = gunner.maxClip;
                 this.reload = false;
                 game.addChild(btnReload);
             }

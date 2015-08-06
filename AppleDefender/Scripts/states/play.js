@@ -4,6 +4,7 @@ var states;
         //CONSTRUCTOR
         function Play() {
             this.wallType = "wood";
+            this.wallCost = 1000;
             this.wave = 1;
             this.main();
         }
@@ -22,8 +23,8 @@ var states;
                     this.NextWave();
                 }
                 wall.update();
-                hud.update();
             }
+            hud.update();
         };
         // destroy method
         Play.prototype.destroy = function () {
@@ -47,13 +48,7 @@ var states;
             game.addChild(grass);
             game.addChild(grass2);
             // add wall type...
-            //wall = new objects.Image("brick_wall");
-            //wall = new objects.Image("steel_wall");
-            wall = new objects.Wall("wood_wall");
-            wall.SetUpWall(canvas.clientWidth * 0.75, 0, 1000);
-            wall.scaleY = 1.5;
-            wall.alpha = 0.8;
-            game.addChild(wall);
+            this.CreateWall("wood_wall", 1000);
             //add toolbar background...
             bgToolBar = new objects.Image("bg");
             bgToolBar.SetPosition(0, canvas.clientHeight - 350);
@@ -90,6 +85,7 @@ var states;
                 apples[apple].scaleY = 0.4;
                 game.addChild(apples[apple]);
             }
+            hud.btnPause_Click();
         };
         Play.prototype.GameOver = function () {
             game.removeAllChildren();
@@ -97,7 +93,7 @@ var states;
             changeState();
         };
         Play.prototype.getNumApples = function () {
-            var num = this.wave * 5;
+            var num = this.wave * 10;
             return num;
         };
         Play.prototype.getAppleSpeed = function () {
@@ -108,6 +104,32 @@ var states;
             var num = Math.floor(Math.random() * (max - 1 + 1)) + 1;
             var num = (num / 10) + 0.6;
             return num;
+        };
+        Play.prototype.UpgradeWall = function () {
+            game.removeChild(wall);
+            switch (this.wallType) {
+                case "wood":
+                    this.wallType = "brick";
+                    this.CreateWall("brick_wall", 2500);
+                    money -= 1000;
+                    break;
+                case "brick":
+                    this.wallType = "steel";
+                    this.CreateWall("steel_wall", 5000);
+                    money -= 2500;
+                    game.removeChild(btnUpgradeWall);
+                    break;
+            }
+        };
+        // Special method to draw the desired wall on the screen
+        Play.prototype.CreateWall = function (stringData, health) {
+            wall = new objects.Wall(stringData);
+            wall.SetUpWall(canvas.clientWidth * 0.75, 0, health);
+            wall.scaleY = 1.47; // exact to avoid overlap when re-drawn.
+            wall.alpha = 0.8;
+            game.addChild(wall);
+            game.removeChild(gunner);
+            game.addChild(gunner);
         };
         return Play;
     })();

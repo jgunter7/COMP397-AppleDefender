@@ -2,7 +2,8 @@
     // Plane Class ++++++++++++++++++++++++++++++++++++++
     export class Gun extends objects.GameObject {
         // PUBLIC PROPERTIES +++++++++++++++++++++++++++
-        public clip: number = 30;
+        public maxClip: number = 10;
+        public clip: number = 10;
         public reloadTime: number = 5;
         // CONSTRUCTOR ++++++++++++++++++++++++++++++++++
         constructor(imageString: string) {

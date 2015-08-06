@@ -44,13 +44,14 @@
             btnReload.y = 615;
             btnReload.on("click", this.btnReload_Click);
             btnUpgradeWall = new objects.Button("upgrade");
-            btnUpgradeWall.x = 925;
+            btnUpgradeWall.x = 960;
             btnUpgradeWall.y = 615;
             btnUpgradeWall.on("click", this.btnUpgradeWall_Click);
             // Add game buttons
             game.addChild(btnPause);
             game.addChild(btnQuit);
             game.addChild(btnReload);
+            game.addChild(btnUpgradeWall);
         }
 
         // PUBLIC METHODS +++++++++++++++++
@@ -67,7 +68,7 @@
             this.lblMoney.text = "Money: " + money;
         }
 
-        private btnPause_Click() {
+        public btnPause_Click() {
             pause = true;
             game.removeChild(btnPause);
             game.addChild(btnPlay);
@@ -76,10 +77,8 @@
 
         private btnPlay_Click() {
             pause = false;
-            config.FIRING = false;
             game.removeChild(btnPlay);
             game.addChild(btnPause);
-            config.FIRING = false;
         }
 
         private btnQuit_Click() {
@@ -97,7 +96,16 @@
         }
 
         private btnUpgradeWall_Click() {
-            if (money >= 
+            switch (play.wallType) {
+                case "wood":
+                    if (money >= 1000)
+                        play.UpgradeWall();
+                    break;
+                case "brick":
+                    if (money >= 2500)
+                        play.UpgradeWall();
+                    break;
+            }
         }
     }
 }  
