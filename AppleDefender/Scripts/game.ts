@@ -16,8 +16,6 @@
 
 /// <reference path="managers/bullet.ts" />
 
-/// <reference path="managers/collision.ts" />
-
 /// <reference path="states/instruction.ts" />
 /// <reference path="states/gameover.ts" />
 /// <reference path="states/play.ts" />
@@ -41,15 +39,28 @@ var grass2: objects.Image;
 var bgToolBar: objects.Image;
 var wall: objects.Wall;
 var apples: objects.Apple[] = [];
+var btnStart: objects.Button;
+var btnInstructions: objects.Button;
+var btnBack: objects.Button;
+var btnNext: objects.Button;
+var btnQuitGO: objects.Button;
+var btnQuit: objects.Button;
+var btnPause: objects.Button;
+var btnPlay: objects.Button;
+var btnUpgradeWall: objects.Button;
+var btnUpgradeClip: objects.Button;
+var btnUpgradeRTime: objects.Button;
+var btnReload: objects.Button;
 
-var scoreboard: objects.ScoreBoard;
+var hud: objects.HUD;
 var score: number = 0;
+var money: number = 0;
+var pause: boolean = false;
 
 
 // Game Managers
 var assets: managers.Asset;
 var bulletManager: managers.BulletManager;
-var collision: managers.Collision;
 
 // Game States
 var currentStateFunction; // state alias

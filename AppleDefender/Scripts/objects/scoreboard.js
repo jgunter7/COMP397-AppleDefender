@@ -6,11 +6,8 @@ var objects;
             // PUBLIC PROPERTIES
             this.score = 0;
             this.lives = 5;
-            this.livesLabel = new createjs.Text("Lives:", config.FONT_MEDIUM + " " + config.FONT_FAMILY, config.YELLOW);
-            this.scoreLabel = new createjs.Text("Score:", config.FONT_MEDIUM + " " + config.FONT_FAMILY, config.YELLOW);
-            this.scoreLabel.x = 350;
-            game.addChild(this.livesLabel);
-            game.addChild(this.scoreLabel);
+            this.temp = new objects.Label("bob", config.FONT_MEDIUM, config.FONT_FAMILY, config.YELLOW, 0, 0);
+            //game.addChild(this.scoreLabel);
         }
         // PUBLIC METHODS +++++++++++++++++
         ScoreBoard.prototype.update = function () {

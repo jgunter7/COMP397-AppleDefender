@@ -1,37 +1,35 @@
 ﻿module states {
     export class Play {
         public wallType = "wood";
+        public wave: number = 1;
 
         //CONSTRUCTOR
         constructor() {
             this.main();
         }
 
-
         // PUBLIC METHODS
         // update method
         public update() {
-            gunner.update();
-            bulletManager.update();
-            for (var apple = 0; apple < apples.length; apple++) {
-                apples[apple].update();
-            }    
+            if (!pause) {
+                gunner.update();
+                bulletManager.update();
+                if (apples.length != 0) {
+                    for (var apple = 0; apple < apples.length; apple++) {
+                        apples[apple].update();
+                    }
+                }
+                else {
+                    this.NextWave();
+                }
+                wall.update();
+                hud.update();
+            }
         }
 
         // destroy method
         public destroy() {
-            //plane.engineSound.stop();
             game.removeAllChildren();
-        }
-
-        // utility method that checks if lives are zero
-        public checkLives() {
-            if (scoreboard.lives < 1) {
-                score = scoreboard.score;
-                this.destroy();
-                currentState = config.GAME_OVER_STATE;
-                changeState();
-            }
         }
 
         // main method
@@ -55,39 +53,30 @@
             game.addChild(grass2);
 
             // add wall type...
-                    //wall = new objects.Image("brick_wall");
-                    //wall = new objects.Image("steel_wall");
-            wall = new objects.Wall("wood_wall");
-            wall.SetUpWall(canvas.clientWidth * 0.75, 0, 1000);
-            wall.scaleY = 1.5;
-            wall.alpha = 0.8;
-            game.addChild(wall);
+            this.CreateWall("wood_wall", 1000);
 
             //add toolbar background...
             bgToolBar = new objects.Image("bg");
             bgToolBar.SetPosition(0, canvas.clientHeight - 350);
             bgToolBar.scaleX = 2;
             game.addChild(bgToolBar);
-
+            
             // add gun to game object
             gunner = new objects.Gun("gun");
             gunner.scaleX = gunner.scaleY = Math.min(180 / gunner.width, 180 / gunner.height);
             game.addChild(gunner);
             
             //add apples to game
-            for (var apple = 0; apple < 30; apple++) {
+            for (var apple = 0; apple < this.getNumApples(); apple++) {
                 apples[apple] = new objects.Apple("apple");
-                apples[apple].SetUpApple(3, config.APPLE_SPEED1);
+                apples[apple].SetUpApple(3, this.getAppleSpeed());
                 apples[apple].scaleX = 0.4;
                 apples[apple].scaleY = 0.4;
                 game.addChild(apples[apple]);
             }             
 
             //add scoreboard
-            scoreboard = new objects.ScoreBoard();
-
-            //add collision manager
-            collision = new managers.Collision();
+            hud = new objects.HUD();
 
             // add bullet manager
             bulletManager = new managers.BulletManager();
@@ -98,6 +87,61 @@
 
         public Shoot() {
             config.FIRING = true;
+        }
+
+        public NextWave() {
+            this.wave++;
+            for (var apple = 0; apple < this.getNumApples(); apple++) {
+                apples[apple] = new objects.Apple("apple");
+                apples[apple].SetUpApple(3, this.getAppleSpeed());
+                apples[apple].scaleX = 0.4;
+                apples[apple].scaleY = 0.4;
+                game.addChild(apples[apple]);
+            }    
+        }
+
+        public GameOver() {
+            game.removeAllChildren();
+            currentState = config.GAME_OVER_STATE;
+            changeState();
+        }
+
+        private getNumApples(): number {
+            var num = this.wave * 5;
+            return num;
+        }
+
+        private getAppleSpeed(): number {
+            // generate random speed between wave # and 1 a max of 6;
+            var max = 6;
+            if (this.wave <= 6)
+                max = this.wave;
+            var num = Math.floor(Math.random() * (max - 1 + 1)) + 1;
+            var num = (num / 10) + 0.6;
+            return num;
+        }
+
+        public UpgradeWall() {
+            game.removeChild(wall);
+            switch (this.wallType) {
+                case "wood":
+                    this.wallType = "brick";
+                    this.CreateWall("brick_wall", 2500);
+                    break;
+                case "brick":
+                    this.wallType = "steel";
+                    this.CreateWall("steel_wall", 5000);
+                    break;
+            }
+        }
+
+        // Special method to draw the desired wall on the screen
+        private CreateWall(stringData: string, health: number) {
+            wall = new objects.Wall(stringData);
+            wall.SetUpWall(canvas.clientWidth * 0.75, 0, health);
+            wall.scaleY = 1.5;
+            wall.alpha = 0.8;
+            game.addChild(wall);
         }
     }
 } 

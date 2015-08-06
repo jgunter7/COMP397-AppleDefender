@@ -49,7 +49,5 @@
 
     // bullet constants
     export const BULLET_SPEED: number = 25;
-    export const APPLE_SPEED1: number = 2;
-    export const APPLE_SPEED2: number = 4;
-    export const APPLE_SPEED3: number = 8;
+    
 } 

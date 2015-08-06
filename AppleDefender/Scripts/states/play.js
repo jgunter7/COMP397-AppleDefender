@@ -4,30 +4,30 @@ var states;
         //CONSTRUCTOR
         function Play() {
             this.wallType = "wood";
+            this.wave = 1;
             this.main();
         }
         // PUBLIC METHODS
         // update method
         Play.prototype.update = function () {
-            gunner.update();
-            bulletManager.update();
-            for (var apple = 0; apple < apples.length; apple++) {
-                apples[apple].update();
+            if (!pause) {
+                gunner.update();
+                bulletManager.update();
+                if (apples.length != 0) {
+                    for (var apple = 0; apple < apples.length; apple++) {
+                        apples[apple].update();
+                    }
+                }
+                else {
+                    this.NextWave();
+                }
+                wall.update();
+                hud.update();
             }
         };
         // destroy method
         Play.prototype.destroy = function () {
-            //plane.engineSound.stop();
             game.removeAllChildren();
-        };
-        // utility method that checks if lives are zero
-        Play.prototype.checkLives = function () {
-            if (scoreboard.lives < 1) {
-                score = scoreboard.score;
-                this.destroy();
-                currentState = config.GAME_OVER_STATE;
-                changeState();
-            }
         };
         // main method
         Play.prototype.main = function () {
@@ -64,17 +64,15 @@ var states;
             gunner.scaleX = gunner.scaleY = Math.min(180 / gunner.width, 180 / gunner.height);
             game.addChild(gunner);
             //add apples to game
-            for (var apple = 0; apple < 30; apple++) {
+            for (var apple = 0; apple < this.getNumApples(); apple++) {
                 apples[apple] = new objects.Apple("apple");
-                apples[apple].SetUpApple(3, config.APPLE_SPEED1);
+                apples[apple].SetUpApple(3, this.getAppleSpeed());
                 apples[apple].scaleX = 0.4;
                 apples[apple].scaleY = 0.4;
                 game.addChild(apples[apple]);
             }
             //add scoreboard
-            scoreboard = new objects.ScoreBoard();
-            //add collision manager
-            collision = new managers.Collision();
+            hud = new objects.HUD();
             // add bullet manager
             bulletManager = new managers.BulletManager();
             //add game container to stage
@@ -82,6 +80,34 @@ var states;
         };
         Play.prototype.Shoot = function () {
             config.FIRING = true;
+        };
+        Play.prototype.NextWave = function () {
+            this.wave++;
+            for (var apple = 0; apple < this.getNumApples(); apple++) {
+                apples[apple] = new objects.Apple("apple");
+                apples[apple].SetUpApple(3, this.getAppleSpeed());
+                apples[apple].scaleX = 0.4;
+                apples[apple].scaleY = 0.4;
+                game.addChild(apples[apple]);
+            }
+        };
+        Play.prototype.GameOver = function () {
+            game.removeAllChildren();
+            currentState = config.GAME_OVER_STATE;
+            changeState();
+        };
+        Play.prototype.getNumApples = function () {
+            var num = this.wave * 5;
+            return num;
+        };
+        Play.prototype.getAppleSpeed = function () {
+            // generate random speed between wave # and 1 a max of 6;
+            var max = 6;
+            if (this.wave <= 6)
+                max = this.wave;
+            var num = Math.floor(Math.random() * (max - 1 + 1)) + 1;
+            var num = (num / 10) + 0.6;
+            return num;
         };
         return Play;
     })();

@@ -4,6 +4,8 @@
         // PRIVATE PROPERTIES +++++++++++++++++++++++++++++++++++++++++++++++++++
         private _bullets = [];
         private _bulletCount: number = 0;
+        public reload: boolean = false;
+        private waitTime: number = 0;
         // CONSTRUCTOR ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         constructor() {
 
@@ -76,14 +78,38 @@
                 this._checkBounds(bullet);
             } 
 
+            if (this.reload) {
+                this.CheckReloadDone();
+            }
+
             // fire bullet if mouse button is clicked or game container is tapped
-            if ((config.FIRING) && (this._bulletCount % 10 == 0)) {
-                    this._fire();
+            if ((config.FIRING) && (this._bulletCount % 10 == 0) && !this.reload) {
+                this._fire();
+                gunner.clip--;
+                if (gunner.clip == 0)
+                    this.ReloadGun();
             }
             //increment bullet count to limit number of bullets being fired
             this._bulletCount++;
         } // end update
 
-        
+        private ReloadGun() {
+            this.reload = true;
+            this.waitTime = 0;
+            config.FIRING = false;
+            game.removeChild(btnReload);
+        }
+
+        private CheckReloadDone() {
+            if (60 * gunner.reloadTime == this.waitTime) {
+                gunner.clip = 30;
+                this.reload = false;
+                game.addChild(btnReload);
+            }
+            else {
+                this.waitTime++;
+                config.FIRING = false;
+            }
+        }        
     }
 }  

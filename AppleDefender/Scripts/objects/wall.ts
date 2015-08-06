@@ -18,7 +18,10 @@
             this.y = y;
             this.health = h;
         }
-
         
+        public update() {
+            if (this.health <= 0)
+                play.GameOver();
+        }        
     }
 }  

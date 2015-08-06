@@ -7,6 +7,8 @@ var managers;
             // PRIVATE PROPERTIES +++++++++++++++++++++++++++++++++++++++++++++++++++
             this._bullets = [];
             this._bulletCount = 0;
+            this.reload = false;
+            this.waitTime = 0;
         }
         // PRIVATE METHODS +++++++++++++++++++++++++++++++++++++++++++++++++++++
         // BULLET FIRE METHOD
@@ -60,13 +62,36 @@ var managers;
                 bullet.update();
                 this._checkBounds(bullet);
             }
+            if (this.reload) {
+                this.CheckReloadDone();
+            }
             // fire bullet if mouse button is clicked or game container is tapped
-            if ((config.FIRING) && (this._bulletCount % 10 == 0)) {
+            if ((config.FIRING) && (this._bulletCount % 10 == 0) && !this.reload) {
                 this._fire();
+                gunner.clip--;
+                if (gunner.clip == 0)
+                    this.ReloadGun();
             }
             //increment bullet count to limit number of bullets being fired
             this._bulletCount++;
         }; // end update
+        BulletManager.prototype.ReloadGun = function () {
+            this.reload = true;
+            this.waitTime = 0;
+            config.FIRING = false;
+            game.removeChild(btnReload);
+        };
+        BulletManager.prototype.CheckReloadDone = function () {
+            if (60 * gunner.reloadTime == this.waitTime) {
+                gunner.clip = 30;
+                this.reload = false;
+                game.addChild(btnReload);
+            }
+            else {
+                this.waitTime++;
+                config.FIRING = false;
+            }
+        };
         return BulletManager;
     })();
     managers.BulletManager = BulletManager;

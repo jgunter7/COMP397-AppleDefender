@@ -11,7 +11,6 @@
 /// <reference path="objects/button.ts" />
 /// <reference path="objects/label.ts" />
 /// <reference path="managers/bullet.ts" />
-/// <reference path="managers/collision.ts" />
 /// <reference path="states/instruction.ts" />
 /// <reference path="states/gameover.ts" />
 /// <reference path="states/play.ts" />
@@ -29,12 +28,25 @@ var grass2;
 var bgToolBar;
 var wall;
 var apples = [];
-var scoreboard;
+var btnStart;
+var btnInstructions;
+var btnBack;
+var btnNext;
+var btnQuitGO;
+var btnQuit;
+var btnPause;
+var btnPlay;
+var btnUpgradeWall;
+var btnUpgradeClip;
+var btnUpgradeRTime;
+var btnReload;
+var hud;
 var score = 0;
+var money = 0;
+var pause = false;
 // Game Managers
 var assets;
 var bulletManager;
-var collision;
 // Game States
 var currentStateFunction; // state alias
 var currentState;

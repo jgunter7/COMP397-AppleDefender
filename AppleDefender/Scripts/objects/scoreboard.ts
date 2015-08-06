@@ -6,14 +6,13 @@
 
         private scoreLabel: createjs.Text;
         private livesLabel: createjs.Text;
+        private temp: objects.Label;
 
         // CONSTRUCTOR +++++++++++++++++++
         constructor() {
-            this.livesLabel = new createjs.Text("Lives:", config.FONT_MEDIUM + " " + config.FONT_FAMILY, config.YELLOW);
-            this.scoreLabel = new createjs.Text("Score:", config.FONT_MEDIUM + " " + config.FONT_FAMILY, config.YELLOW);
-            this.scoreLabel.x = 350;
-            game.addChild(this.livesLabel);
-            game.addChild(this.scoreLabel);
+            
+            this.temp = new objects.Label("bob", config.FONT_MEDIUM, config.FONT_FAMILY, config.YELLOW, 0, 0);
+            //game.addChild(this.scoreLabel);
         }
 
         // PUBLIC METHODS +++++++++++++++++

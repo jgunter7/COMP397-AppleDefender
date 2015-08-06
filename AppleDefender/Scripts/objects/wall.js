@@ -21,6 +21,10 @@ var objects;
             this.y = y;
             this.health = h;
         };
+        Wall.prototype.update = function () {
+            if (this.health <= 0)
+                play.GameOver();
+        };
         return Wall;
     })(objects.GameObject);
     objects.Wall = Wall;

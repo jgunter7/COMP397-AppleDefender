@@ -9,10 +9,12 @@ var objects;
     // Plane Class ++++++++++++++++++++++++++++++++++++++
     var Gun = (function (_super) {
         __extends(Gun, _super);
-        // PUBLIC PROPERTIES +++++++++++++++++++++++++++
         // CONSTRUCTOR ++++++++++++++++++++++++++++++++++
         function Gun(imageString) {
             _super.call(this, imageString);
+            // PUBLIC PROPERTIES +++++++++++++++++++++++++++
+            this.clip = 30;
+            this.reloadTime = 5;
             this.sound = "shot";
             this.y = (canvas.clientHeight / 2) - (this.getBounds().height);
             this.x = canvas.clientWidth * 0.75;
