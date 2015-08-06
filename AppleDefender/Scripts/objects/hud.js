@@ -86,9 +86,11 @@ var objects;
             config.FIRING = false;
         };
         HUD.prototype.btnPlay_Click = function () {
+            config.FIRING = false;
             pause = false;
             game.removeChild(btnPlay);
             game.addChild(btnPause);
+            config.FIRING = false;
         };
         HUD.prototype.btnQuit_Click = function () {
             game.removeAllChildren();
@@ -121,7 +123,7 @@ var objects;
                 money -= play.reloadCost;
                 play.reloadCost += 1000;
             }
-            if (play.reloadCost >= 4000) {
+            if (play.reloadCost >= 5000) {
                 play.RemoveReloadUpgrade();
             }
         };

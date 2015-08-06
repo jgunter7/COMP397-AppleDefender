@@ -83,7 +83,7 @@ var states;
             this.wave++;
             for (var apple = 0; apple < this.getNumApples(); apple++) {
                 apples[apple] = new objects.Apple("apple");
-                apples[apple].SetUpApple(3, this.getAppleSpeed());
+                apples[apple].SetUpApple(2, this.getAppleSpeed());
                 apples[apple].scaleX = 0.4;
                 apples[apple].scaleY = 0.4;
                 game.addChild(apples[apple]);

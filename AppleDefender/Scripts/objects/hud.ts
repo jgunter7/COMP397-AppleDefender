@@ -101,9 +101,11 @@
         }
 
         private btnPlay_Click() {
+            config.FIRING = false;
             pause = false;
             game.removeChild(btnPlay);
             game.addChild(btnPause);
+            config.FIRING = false;
         }
 
         private btnQuit_Click() {
@@ -140,7 +142,7 @@
                 money -= play.reloadCost;
                 play.reloadCost += 1000;
             }
-            if (play.reloadCost >= 4000) {
+            if (play.reloadCost >= 5000) {
                 play.RemoveReloadUpgrade();
             }
         }

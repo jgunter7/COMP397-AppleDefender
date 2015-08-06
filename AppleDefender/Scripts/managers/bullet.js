@@ -85,7 +85,7 @@ var managers;
             game.removeChild(btnReload);
         };
         BulletManager.prototype.CheckReloadDone = function () {
-            if (60 * gunner.reloadTime == this.waitTime) {
+            if (60 * gunner.reloadTime <= this.waitTime) {
                 gunner.clip = gunner.maxClip;
                 this.reload = false;
                 game.addChild(btnReload);

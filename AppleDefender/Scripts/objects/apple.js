@@ -9,21 +9,26 @@ var objects;
     // Apple Class
     var Apple = (function (_super) {
         __extends(Apple, _super);
-        // CONSTRUCTOR ++++++++++++++++++++++++++++++++++
+        // CONSTRUCTOR +++++++++++++++++++++++++++++++++
         function Apple(imageString) {
             _super.call(this, imageString);
             this.sound = "hit";
             this.dieSound = "die";
             this.eating = false;
         }
-        // PUBLIC METHODS +++++++++++++++++++++++++++++++
+        // PUBLIC METHODS ++++++++++++++++++++++++++++++
         Apple.prototype.SetUpApple = function (health, speed) {
             this.health = health;
             this.speed = speed;
             //y = between 0 and 520 - height
             //x = -width and -500
             this.y = Math.floor(Math.random() * (520 - 5 + 1)) + 5;
-            this.x = -1 * (Math.floor(Math.random() * (5000 - 500 + 1)) + 500);
+            this.x = -1 * (Math.floor(Math.random() * (this.GetMaxOffScreen() - 50 + 1)) + 50);
+        };
+        Apple.prototype.GetMaxOffScreen = function () {
+            var wave = apples.length / 10;
+            var num = (((wave - 1) * 100) + 1000);
+            return num;
         };
         Apple.prototype.update = function () {
             this.CheckHealth();
