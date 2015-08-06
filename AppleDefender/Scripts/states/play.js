@@ -76,7 +76,8 @@ var states;
             stage.addChild(game);
         };
         Play.prototype.Shoot = function () {
-            config.FIRING = true;
+            if (stage.mouseY < 550)
+                config.FIRING = true; // only fire if player clicks higher than the button bar.
         };
         Play.prototype.NextWave = function () {
             this.wave++;
@@ -119,7 +120,6 @@ var states;
                     this.wallType = "steel";
                     this.CreateWall("steel_wall", 5000);
                     money -= 2500;
-                    game.removeChild(btnUpgradeWall);
                     break;
             }
         };
@@ -132,6 +132,18 @@ var states;
             game.addChild(wall);
             game.removeChild(gunner);
             game.addChild(gunner);
+        };
+        Play.prototype.RemoveWallUpgrades = function () {
+            game.removeChild(btnUpgradeWall);
+            game.removeChild(hud.lblWallUpgradeCost);
+        };
+        Play.prototype.RemoveClipUpgrade = function () {
+            game.removeChild(btnUpgradeClip);
+            game.removeChild(hud.lblClipUpgradeCost);
+        };
+        Play.prototype.RemoveReloadUpgrade = function () {
+            game.removeChild(btnUpgradeRTime);
+            game.removeChild(hud.lblReloadUpgradeCost);
         };
         return Play;
     })();

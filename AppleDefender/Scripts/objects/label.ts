@@ -12,5 +12,9 @@
             this.y = y;
 
         }
+
+        public Destroylabel() {
+            game.removeChild(this);
+        }
     }
 } 

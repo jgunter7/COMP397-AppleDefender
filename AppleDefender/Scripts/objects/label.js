@@ -17,6 +17,9 @@ var objects;
             this.x = x;
             this.y = y;
         }
+        Label.prototype.Destroylabel = function () {
+            game.removeChild(this);
+        };
         return Label;
     })(createjs.Text);
     objects.Label = Label;

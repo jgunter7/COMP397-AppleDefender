@@ -10,7 +10,15 @@ var objects;
             this.lblWave = new objects.Label("Wave:", config.FONT_SMALL, config.FONT_FAMILY, config.YELLOW, 50, 680);
             this.lblReload = new objects.Label("Reload Time:", config.FONT_SMALL, config.FONT_FAMILY, config.YELLOW, 1160, 680);
             this.lblMoney = new objects.Label("Money:", config.FONT_SMALL, config.FONT_FAMILY, config.YELLOW, 50, 610);
+            this.lblApples = new objects.Label("Apples Remaining:", config.FONT_SMALL, config.FONT_FAMILY, config.YELLOW, 700, 680);
+            this.lblClipUpgradeCost = new objects.Label("Clip: $1000", config.FONT_SMALL, config.FONT_FAMILY, config.GREEN, 250, 570);
+            this.lblReloadUpgradeCost = new objects.Label("Reload: $1000", config.FONT_SMALL, config.FONT_FAMILY, config.GREEN, 435, 570);
+            this.lblWallUpgradeCost = new objects.Label("Wall: $1000", config.FONT_SMALL, config.FONT_FAMILY, config.GREEN, 955, 570);
             // Add game labels
+            game.addChild(this.lblWallUpgradeCost);
+            game.addChild(this.lblClipUpgradeCost);
+            game.addChild(this.lblReloadUpgradeCost);
+            game.addChild(this.lblApples);
             game.addChild(this.lblMoney);
             game.addChild(this.lblReload);
             game.addChild(this.lblWave);
@@ -39,12 +47,12 @@ var objects;
             btnUpgradeWall.y = 615;
             btnUpgradeWall.on("click", this.btnUpgradeWall_Click);
             btnUpgradeRTime = new objects.Button("upgrade");
-            btnUpgradeRTime.x = 760;
+            btnUpgradeRTime.x = 435;
             btnUpgradeRTime.y = 615;
             btnUpgradeRTime.on("click", this.btnUpgradeRTime_Click);
             btnUpgradeClip = new objects.Button("upgrade");
-            btnUpgradeClip.x = 760;
-            btnUpgradeClip.y = 680;
+            btnUpgradeClip.x = 250;
+            btnUpgradeClip.y = 615;
             btnUpgradeClip.on("click", this.btnUpgradeClip_Click);
             // Add game buttons
             game.addChild(btnUpgradeClip);
@@ -61,11 +69,15 @@ var objects;
                 this.lblClip.text = "Reloading...";
             else
                 this.lblClip.text = "Clip: " + gunner.clip;
+            this.lblApples.text = "Apples Remaining: " + apples.length;
             this.lblWall.text = "Health: " + Math.floor(wall.health);
             this.lblWave.text = "Wave: " + play.wave;
             this.lblScore.text = "Score: " + score;
             this.lblReload.text = "Reload Time: " + gunner.reloadTime;
             this.lblMoney.text = "Money: " + money;
+            this.lblClipUpgradeCost.text = "Clip: $" + play.clipCost;
+            this.lblReloadUpgradeCost.text = "Reload: $" + play.reloadCost;
+            this.lblWallUpgradeCost.text = "Wall: $" + play.wallCost;
         };
         HUD.prototype.btnPause_Click = function () {
             pause = true;
@@ -84,20 +96,22 @@ var objects;
             changeState();
         };
         HUD.prototype.btnReload_Click = function () {
-            var loopLength = 1; // in seconds
-            var loopTimes = (gunner.reloadTime / loopLength) - 1;
             gunner.clip = 1; // forces a reload, cant seem to stop bullet being deployed onclick.
             game.removeChild(btnReload); // removes reload button while a reload is performed.
         };
         HUD.prototype.btnUpgradeWall_Click = function () {
             switch (play.wallType) {
                 case "wood":
-                    if (money >= 1000)
+                    if (money >= play.wallCost) {
                         play.UpgradeWall();
+                        play.wallCost = 2500;
+                    }
                     break;
                 case "brick":
-                    if (money >= 2500)
+                    if (money >= play.wallCost) {
                         play.UpgradeWall();
+                        play.RemoveWallUpgrades();
+                    }
                     break;
             }
         };
@@ -107,6 +121,9 @@ var objects;
                 money -= play.reloadCost;
                 play.reloadCost += 1000;
             }
+            if (play.reloadCost >= 4000) {
+                play.RemoveReloadUpgrade();
+            }
         };
         HUD.prototype.btnUpgradeClip_Click = function () {
             if (money >= play.clipCost) {
@@ -114,6 +131,9 @@ var objects;
                 gunner.clip = gunner.maxClip;
                 money -= play.clipCost;
                 play.clipCost += 1000;
+            }
+            if (play.clipCost >= 5000) {
+                play.RemoveClipUpgrade();
             }
         };
         return HUD;
