@@ -44,6 +44,8 @@ var hud;
 var score = 0;
 var money = 0;
 var pause = false;
+var autoGun = false;
+var agCount = 0;
 // Game Managers
 var assets;
 var bulletManager;
@@ -69,7 +71,7 @@ function init() {
     // event listener triggers 60 times every second
     createjs.Ticker.on("tick", gameLoop);
     // set the current state
-    currentState = config.PLAY_STATE;
+    currentState = config.MENU_STATE;
     // calling main game function
     changeState();
 }

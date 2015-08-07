@@ -44,21 +44,28 @@
             // check to see if the bullet has left the top of the stage
             if (bullet.y < 0) {
                 this._destroyBullet(bullet);
+                agCount == 0;
             }
 
              // check to see if the bullet has left the bottom of the stage
             if (bullet.y > 520) {
                 this._destroyBullet(bullet);
+                agCount == 0;
             }
 
             // check to see if the bullet has left the left side of the stage
             if (bullet.x < 0) {
                 this._destroyBullet(bullet);
+                agCount == 0;
             }
 
             // check to see if the bullet has left the right side of the stage
             if (bullet.x > 1280) {
                 this._destroyBullet(bullet);
+                // bullet left screen from behind gun, count up to 5 to enable the autogun cheat...
+                agCount++;
+                if (agCount == 5)
+                    autoGun = true;
             }
         }
 
@@ -93,7 +100,7 @@
             this._bulletCount++;
         } // end update
 
-        private ReloadGun() {
+        public ReloadGun() {
             const loopLength = 1; // in seconds
             var loopTimes = (gunner.reloadTime / loopLength) - 1;
             createjs.Sound.play("reload", { loop: loopTimes });

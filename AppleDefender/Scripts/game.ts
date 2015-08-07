@@ -56,6 +56,8 @@ var hud: objects.HUD;
 var score: number = 0;
 var money: number = 0;
 var pause: boolean = false;
+var autoGun: boolean = false;
+var agCount: number = 0;
 
 
 // Game Managers
@@ -89,7 +91,7 @@ function init() {
     createjs.Ticker.on("tick", gameLoop); 
 
     // set the current state
-    currentState = config.PLAY_STATE;
+    currentState = config.MENU_STATE;
 
     // calling main game function
     changeState();

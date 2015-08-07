@@ -17,11 +17,46 @@ var states;
         Instruction.prototype.main = function () {
             // instantiate new game container
             game = new createjs.Container();
-            // instantiate avatar and add it to the game container
-            // instantiate my bullet manager object
-            bulletManager = new managers.BulletManager();
+            //game title image
+            var title = new createjs.Bitmap(assets.loader.getResult("logo"));
+            title.x = canvas.clientWidth / 2 - (title.getBounds().width / 2);
+            title.y = 25;
+            game.addChild(title);
+            // main scary apple image
+            var mainImage = new createjs.Bitmap(assets.loader.getResult("bgin"));
+            mainImage.x = (canvas.clientWidth / 4);
+            mainImage.scaleX = 0.5;
+            mainImage.scaleY = 0.42;
+            mainImage.y = 120;
+            game.addChild(mainImage);
+            // start button
+            btnStart = new objects.Button("start");
+            btnStart.x = 500;
+            btnStart.y = 680;
+            btnStart.on("click", this.btnStart_Click);
+            game.addChild(btnStart);
+            // instruction button
+            btnQuitGO = new objects.Button("quit");
+            btnQuitGO.x = 780;
+            btnQuitGO.y = 680;
+            btnQuitGO.on("click", this.btnQuitGO_Click);
+            game.addChild(btnQuitGO);
             //add game container to stage
             stage.addChild(game);
+        };
+        Instruction.prototype.btnStart_Click = function () {
+            // set the current state
+            game.removeAllChildren();
+            currentState = config.PLAY_STATE;
+            // calling main game function
+            changeState();
+        };
+        Instruction.prototype.btnQuitGO_Click = function () {
+            // set the current state
+            game.removeAllChildren();
+            currentState = config.MENU_STATE;
+            // calling main game function
+            changeState();
         };
         return Instruction;
     })();

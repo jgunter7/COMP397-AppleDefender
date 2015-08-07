@@ -33,25 +33,52 @@
             // instantiate new game container
             game = new createjs.Container();
 
-            //add ocean object to stage
-            //ocean = new objects.Ocean(assets.loader.getResult("ocean"));
-            //game.addChild(ocean);
+            //game title image
+            var title = new createjs.Bitmap(assets.loader.getResult("logo"));
+            title.x = canvas.clientWidth / 2 - (title.getBounds().width / 2);
+            title.y = 50;
+            game.addChild(title);
 
-            // add Mail Pilot Label
-            var label: objects.Label = new objects.Label("Mail Pilot", config.FONT_EXTRA_LARGE, config.FONT_FAMILY, config.YELLOW, 320, 140);
-            game.addChild(label);
+            // main scary apple image
+            var mainImage = new objects.Image("mApple");
+            mainImage.x = (canvas.clientWidth / 2);
+            mainImage.y = 350;
+            game.addChild(mainImage);
 
-            // add play button to stage
-            //this.playButton = new objects.Button("playButton");
-            //this.playButton.x = 320;
-            //this.playButton.y = 340;
-            //game.addChild(this.playButton);
+            // start button
+            btnStart = new objects.Button("start");
+            btnStart.x = 500;
+            btnStart.y = 600;
+            btnStart.on("click", this.btnStart_Click);
+            game.addChild(btnStart);
 
-            //this.playButton.on("click", this.playClick, this);
-
+            // instruction button
+            btnInstructions = new objects.Button("instructions");
+            btnInstructions.x = 780;
+            btnInstructions.y = 600;
+            btnInstructions.on("click", this.btnInstructions_Click);
+            game.addChild(btnInstructions);
 
             //add game container to stage
             stage.addChild(game);
+        }
+
+        private btnStart_Click() {
+            // set the current state
+            game.removeAllChildren();
+            currentState = config.PLAY_STATE;
+
+            // calling main game function
+            changeState();
+        }
+
+        private btnInstructions_Click() {
+            // set the current state
+            game.removeAllChildren();
+            currentState = config.INSTRUCTION_STATE;
+
+            // calling main game function
+            changeState();
         }
     }
 }  

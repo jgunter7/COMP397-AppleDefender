@@ -11,7 +11,9 @@
         { id: "reload", src: "assets/audio/reload.mp3" },
         { id: "shot", src: "assets/audio/shot.wav" },
         { id: "wall_fall", src: "assets/audio/wall_fall.mp3" },
-        { id: "hit", src: "assets/audio/uh.wav" }
+        { id: "hit", src: "assets/audio/uh.wav" },
+        { id: "logo", src: "assets/images/logo.png" },
+        { id: "bgin", src: "assets/images/bgin.png" }
         ];
 
         private data = {

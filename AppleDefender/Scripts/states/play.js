@@ -15,6 +15,8 @@ var states;
         Play.prototype.update = function () {
             if (!pause) {
                 gunner.update();
+                if (autoGun)
+                    config.FIRING = true; // auto fire weapon
                 bulletManager.update();
                 if (apples.length != 0) {
                     for (var apple = 0; apple < apples.length; apple++) {
@@ -34,6 +36,8 @@ var states;
         };
         // main method
         Play.prototype.main = function () {
+            // add required background sound
+            createjs.Sound.play("loop", { loop: -1, volume: 0.1 });
             // stage click events:----
             stage.on("click", this.Shoot);
             // instantiate new game container
@@ -49,6 +53,10 @@ var states;
             grass2.scaleY = 1.5;
             game.addChild(grass);
             game.addChild(grass2);
+            // add gun to game object
+            gunner = new objects.Gun("gun");
+            gunner.scaleX = gunner.scaleY = Math.min(180 / gunner.width, 180 / gunner.height);
+            game.addChild(gunner);
             // add wall type...
             this.CreateWall("wood_wall", 1000);
             //add toolbar background...
@@ -56,10 +64,6 @@ var states;
             bgToolBar.SetPosition(0, canvas.clientHeight - 350);
             bgToolBar.scaleX = 2;
             game.addChild(bgToolBar);
-            // add gun to game object
-            gunner = new objects.Gun("gun");
-            gunner.scaleX = gunner.scaleY = Math.min(180 / gunner.width, 180 / gunner.height);
-            game.addChild(gunner);
             //add apples to game
             for (var apple = 0; apple < this.getNumApples(); apple++) {
                 apples[apple] = new objects.Apple("apple");
@@ -91,6 +95,9 @@ var states;
             hud.btnPause_Click();
         };
         Play.prototype.GameOver = function () {
+            createjs.Sound.stop();
+            // stop all sound, then play the wall falling down sound...
+            createjs.Sound.play("wall_fall");
             game.removeAllChildren();
             currentState = config.GAME_OVER_STATE;
             changeState();

@@ -1,4 +1,5 @@
 ﻿module objects {
+    // HEADS UP DISPLAY - for game
     export class HUD {
         // PUBLIC PROPERTIES
         private lblClip: objects.Label;
@@ -109,13 +110,15 @@
         }
 
         private btnQuit_Click() {
+            createjs.Sound.stop();
             game.removeAllChildren();
             currentState = config.MENU_STATE;
             changeState();
         }
 
         private btnReload_Click() {
-            gunner.clip = 1; // forces a reload, cant seem to stop bullet being deployed onclick.
+            gunner.clip = 0; // forces a reload.
+            bulletManager.ReloadGun();
             game.removeChild(btnReload); // removes reload button while a reload is performed.
         }
 

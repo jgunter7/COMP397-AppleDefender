@@ -1,5 +1,6 @@
 var objects;
 (function (objects) {
+    // HEADS UP DISPLAY - for game
     var HUD = (function () {
         // CONSTRUCTOR +++++++++++++++++++
         function HUD() {
@@ -93,12 +94,14 @@ var objects;
             config.FIRING = false;
         };
         HUD.prototype.btnQuit_Click = function () {
+            createjs.Sound.stop();
             game.removeAllChildren();
             currentState = config.MENU_STATE;
             changeState();
         };
         HUD.prototype.btnReload_Click = function () {
-            gunner.clip = 1; // forces a reload, cant seem to stop bullet being deployed onclick.
+            gunner.clip = 0; // forces a reload.
+            bulletManager.ReloadGun();
             game.removeChild(btnReload); // removes reload button while a reload is performed.
         };
         HUD.prototype.btnUpgradeWall_Click = function () {
