@@ -19,11 +19,11 @@ var objects;
         Wall.prototype.SetUpWall = function (x, y, h) {
             this.x = x;
             this.y = y;
-            this.health = h;
+            this.health = h; //init wall object with data.
         };
         Wall.prototype.update = function () {
             if (this.health <= 0)
-                play.GameOver();
+                play.GameOver(); // show game over screen, stop music etc.
         };
         return Wall;
     })(objects.GameObject);

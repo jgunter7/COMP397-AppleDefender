@@ -22,7 +22,7 @@ var objects;
         }
         // PUBLIC METHODS +++++++++++++++++++++++++++++++
         Gun.prototype.update = function () {
-            //this.x = stage.mouseX; // position plane under mouse
+            // calc gun direction and rotation.
             var mx = stage.mouseX;
             var my = stage.mouseY;
             var angle = Math.atan2(my - this.y, mx - this.x);

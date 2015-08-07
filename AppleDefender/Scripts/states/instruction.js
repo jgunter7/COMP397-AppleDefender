@@ -9,10 +9,6 @@ var states;
         // update method
         Instruction.prototype.update = function () {
         };
-        // destroy method
-        Instruction.prototype.destroy = function () {
-            game.removeAllChildren();
-        };
         // main method
         Instruction.prototype.main = function () {
             // instantiate new game container
@@ -31,19 +27,20 @@ var states;
             game.addChild(mainImage);
             // start button
             btnStart = new objects.Button("start");
-            btnStart.x = 500;
+            btnStart.x = 540;
             btnStart.y = 680;
             btnStart.on("click", this.btnStart_Click);
             game.addChild(btnStart);
             // instruction button
             btnQuitGO = new objects.Button("quit");
-            btnQuitGO.x = 780;
+            btnQuitGO.x = 740;
             btnQuitGO.y = 680;
             btnQuitGO.on("click", this.btnQuitGO_Click);
             game.addChild(btnQuitGO);
             //add game container to stage
             stage.addChild(game);
         };
+        // start game;
         Instruction.prototype.btnStart_Click = function () {
             // set the current state
             game.removeAllChildren();
@@ -51,6 +48,7 @@ var states;
             // calling main game function
             changeState();
         };
+        // quit to main menu.
         Instruction.prototype.btnQuitGO_Click = function () {
             // set the current state
             game.removeAllChildren();

@@ -9,17 +9,6 @@ var states;
         // update method
         Menu.prototype.update = function () {
         };
-        Menu.prototype.playClick = function (event) {
-            this.destroy();
-            currentState = config.PLAY_STATE;
-            changeState();
-            this.playButton.off("click", this.playClick);
-        };
-        // destroy method
-        Menu.prototype.destroy = function () {
-            //plane.engineSound.stop();
-            game.removeAllChildren();
-        };
         // main method
         Menu.prototype.main = function () {
             // instantiate new game container

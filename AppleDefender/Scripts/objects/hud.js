@@ -81,7 +81,7 @@ var objects;
             this.lblWallUpgradeCost.text = "Wall: $" + play.wallCost;
         };
         HUD.prototype.btnPause_Click = function () {
-            pause = true;
+            pause = true; // keeps the play state from updating...
             game.removeChild(btnPause);
             game.addChild(btnPlay);
             config.FIRING = false;
@@ -89,9 +89,9 @@ var objects;
         HUD.prototype.btnPlay_Click = function () {
             config.FIRING = false;
             pause = false;
-            game.removeChild(btnPlay);
-            game.addChild(btnPause);
-            config.FIRING = false;
+            game.removeChild(btnPlay); // show play
+            game.addChild(btnPause); // remove pause
+            config.FIRING = false; // ensure bullet ammo is not wasted
         };
         HUD.prototype.btnQuit_Click = function () {
             createjs.Sound.stop();
@@ -104,40 +104,47 @@ var objects;
             bulletManager.ReloadGun();
             game.removeChild(btnReload); // removes reload button while a reload is performed.
         };
+        // upgrade wall
         HUD.prototype.btnUpgradeWall_Click = function () {
             switch (play.wallType) {
                 case "wood":
                     if (money >= play.wallCost) {
                         play.UpgradeWall();
                         play.wallCost = 2500;
+                        score += 500;
                     }
                     break;
                 case "brick":
                     if (money >= play.wallCost) {
                         play.UpgradeWall();
                         play.RemoveWallUpgrades();
+                        score += 500;
                     }
                     break;
             }
         };
+        // decrease gunner reload time
         HUD.prototype.btnUpgradeRTime_Click = function () {
             if (money >= play.reloadCost) {
                 gunner.reloadTime--;
                 money -= play.reloadCost;
                 play.reloadCost += 1000;
+                score += 500;
             }
             if (play.reloadCost >= 5000) {
                 play.RemoveReloadUpgrade();
             }
         };
+        // increase gunner clip size
         HUD.prototype.btnUpgradeClip_Click = function () {
             if (money >= play.clipCost) {
                 gunner.maxClip += 10;
                 gunner.clip = gunner.maxClip;
                 money -= play.clipCost;
                 play.clipCost += 1000;
+                score += 500;
             }
-            if (play.clipCost >= 5000) {
+            if (play.clipCost >= 10000) {
                 play.RemoveClipUpgrade();
             }
         };

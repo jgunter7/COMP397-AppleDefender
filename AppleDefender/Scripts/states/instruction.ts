@@ -1,24 +1,16 @@
 ﻿module states {
-    export class Instruction{
-
+    export class Instruction {
 
         //CONSTRUCTOR
         constructor() {
             this.main();
         }
 
-
         // PUBLIC METHODS
         // update method
         public update() {
 
         }
-
-        // destroy method
-        public destroy() {
-            game.removeAllChildren();
-        }
-
 
         // main method
         public main() {
@@ -41,14 +33,14 @@
 
             // start button
             btnStart = new objects.Button("start");
-            btnStart.x = 500;
+            btnStart.x = 540;
             btnStart.y = 680;
             btnStart.on("click", this.btnStart_Click);
             game.addChild(btnStart);
 
             // instruction button
             btnQuitGO = new objects.Button("quit");
-            btnQuitGO.x = 780;
+            btnQuitGO.x = 740;
             btnQuitGO.y = 680;
             btnQuitGO.on("click", this.btnQuitGO_Click);
             game.addChild(btnQuitGO);
@@ -57,6 +49,7 @@
             stage.addChild(game);
         }
 
+        // start game;
         private btnStart_Click() {
             // set the current state
             game.removeAllChildren();
@@ -66,6 +59,7 @@
             changeState();
         }
 
+        // quit to main menu.
         private btnQuitGO_Click() {
             // set the current state
             game.removeAllChildren();

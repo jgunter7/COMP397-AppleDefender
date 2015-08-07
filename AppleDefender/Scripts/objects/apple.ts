@@ -31,6 +31,7 @@
             return num;
         }
 
+        // move closer or attack the wall.
         public update(): void { 
             this.CheckHealth();
             this.CheckBounds();
@@ -41,24 +42,27 @@
             }
         }
 
+        // check if apple is attacking or moving closer.
         private CheckBounds() {
             var max = (canvas.clientWidth * 0.75) - (wall.getTransformedBounds().width / 2) - (this.getTransformedBounds().width / 2);
             if (this.x >= max)
                 this.eating = true;
         }
 
+        // check each apple's helth.
         private CheckHealth() {
             if (this.health <= 0)
                 this.DestroyApple();
         }
 
+        // remove apple from list of apples.
         public DestroyApple() {
             createjs.Sound.play(this.dieSound);
-            score += 25;
-            money += 50;
+            score += 25; // 25 score for each kill.
+            money += 50; // $50 for each kill
 
             var len: number = apples.length;
-            // remove bullet from game and from bullet array
+            // remove apple from game and from apple array
             for (var count = 0; count < len; count++) {
                 if (apples[count] == this) {
                     apples.splice(count, 1);

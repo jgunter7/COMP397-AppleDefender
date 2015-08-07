@@ -10,7 +10,6 @@
 /// <reference path="objects/gameobject.ts" />
 /// <reference path="objects/bullet.ts" />
 
-/// <reference path="objects/scoreboard.ts" />
 /// <reference path="objects/button.ts" />
 /// <reference path="objects/label.ts" />
 

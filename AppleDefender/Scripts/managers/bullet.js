@@ -82,6 +82,7 @@ var managers;
             //increment bullet count to limit number of bullets being fired
             this._bulletCount++;
         }; // end update
+        // make reload sound and timeout bullet firing
         BulletManager.prototype.ReloadGun = function () {
             var loopLength = 1; // in seconds
             var loopTimes = (gunner.reloadTime / loopLength) - 1;
@@ -91,6 +92,7 @@ var managers;
             config.FIRING = false;
             game.removeChild(btnReload);
         };
+        // checks to see if timeout is over so player can fire again.
         BulletManager.prototype.CheckReloadDone = function () {
             if (60 * gunner.reloadTime <= this.waitTime) {
                 gunner.clip = gunner.maxClip;

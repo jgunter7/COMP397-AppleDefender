@@ -8,24 +8,10 @@
             this.main();
         }
 
-
         // PUBLIC METHODS
         // update method
         public update() {
 
-        }
-
-        public playClick(event: createjs.MouseEvent) {
-            this.destroy();
-            currentState = config.PLAY_STATE;
-            changeState();
-            this.playButton.off("click", this.playClick);
-        }
-
-        // destroy method
-        public destroy() {
-            //plane.engineSound.stop();
-            game.removeAllChildren();
         }
 
         // main method

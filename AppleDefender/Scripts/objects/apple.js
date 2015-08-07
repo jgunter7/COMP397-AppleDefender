@@ -30,6 +30,7 @@ var objects;
             var num = (((wave - 1) * 100) + 1000);
             return num;
         };
+        // move closer or attack the wall.
         Apple.prototype.update = function () {
             this.CheckHealth();
             this.CheckBounds();
@@ -39,21 +40,24 @@ var objects;
                 wall.health -= 0.01; // else: decrease wall health.
             }
         };
+        // check if apple is attacking or moving closer.
         Apple.prototype.CheckBounds = function () {
             var max = (canvas.clientWidth * 0.75) - (wall.getTransformedBounds().width / 2) - (this.getTransformedBounds().width / 2);
             if (this.x >= max)
                 this.eating = true;
         };
+        // check each apple's helth.
         Apple.prototype.CheckHealth = function () {
             if (this.health <= 0)
                 this.DestroyApple();
         };
+        // remove apple from list of apples.
         Apple.prototype.DestroyApple = function () {
             createjs.Sound.play(this.dieSound);
-            score += 25;
-            money += 50;
+            score += 25; // 25 score for each kill.
+            money += 50; // $50 for each kill
             var len = apples.length;
-            // remove bullet from game and from bullet array
+            // remove apple from game and from apple array
             for (var count = 0; count < len; count++) {
                 if (apples[count] == this) {
                     apples.splice(count, 1);

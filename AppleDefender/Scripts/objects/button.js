@@ -16,9 +16,11 @@ var objects;
             this.on("mouseout", this.out, this);
         }
         // PUBLIC METHODS
+        // add slight transparancy when mouse is hovering over the button.
         Button.prototype.over = function (event) {
             this.alpha = 0.8;
         };
+        // back to normal look
         Button.prototype.out = function (event) {
             this.alpha = 1.0;
         };

@@ -16,7 +16,7 @@ var objects;
         // PUBLIC METHODS +++++++++++++++++++++++++++++++
         Image.prototype.SetPosition = function (x, y) {
             this.x = x;
-            this.y = y;
+            this.y = y; // set position, createjs.bitmap may be easier to use, or Sprite.
         };
         return Image;
     })(objects.GameObject);

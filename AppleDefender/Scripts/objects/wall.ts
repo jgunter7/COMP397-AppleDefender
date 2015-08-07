@@ -16,12 +16,12 @@
         public SetUpWall(x: number, y: number, h: number): void {
             this.x = x;
             this.y = y;
-            this.health = h;
+            this.health = h; //init wall object with data.
         }
         
         public update() {
             if (this.health <= 0)
-                play.GameOver();
+                play.GameOver(); // show game over screen, stop music etc.
         }        
     }
 }  

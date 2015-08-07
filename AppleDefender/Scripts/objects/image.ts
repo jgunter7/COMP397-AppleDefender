@@ -11,7 +11,7 @@
         // PUBLIC METHODS +++++++++++++++++++++++++++++++
         public SetPosition(x: number, y: number): void {
             this.x = x;
-            this.y = y;
+            this.y = y; // set position, createjs.bitmap may be easier to use, or Sprite.
         }
     }
 }  

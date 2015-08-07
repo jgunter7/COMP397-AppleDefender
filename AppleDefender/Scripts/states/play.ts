@@ -98,6 +98,7 @@
                 config.FIRING = true; // only fire if player clicks higher than the button bar.
         }
 
+        // re-add apples to the game and pause for player.
         public NextWave() {
             this.wave++;
             for (var apple = 0; apple < this.getNumApples(); apple++) {
@@ -110,6 +111,7 @@
             hud.btnPause_Click();   
         }
 
+        // show gameover screen.
         public GameOver() {
             createjs.Sound.stop();
             // stop all sound, then play the wall falling down sound...
@@ -119,11 +121,13 @@
             changeState();
         }
 
+        // get apples for this wave
         private getNumApples(): number {
             var num = this.wave * 10;
             return num;
         }
 
+        // get random apple speed for this wave, called for each apple on creation.
         private getAppleSpeed(): number {
             // generate random speed between wave # and 1 a max of 6;
             var max = 6;
@@ -134,6 +138,7 @@
             return num;
         }
 
+        // upgrade the wall, uses CreateWall().
         public UpgradeWall() {
             game.removeChild(wall);
             switch (this.wallType) {
@@ -154,23 +159,26 @@
         private CreateWall(stringData: string, health: number) {
             wall = new objects.Wall(stringData);
             wall.SetUpWall(canvas.clientWidth * 0.75, 0, health);
-            wall.scaleY = 1.47; // exact to avoid overlap when re-drawn.
+            wall.scaleY = 1.47; // exact to avoid overlap when re-drawn. Don't Ask :(
             wall.alpha = 0.8;
             game.addChild(wall);
             game.removeChild(gunner);
             game.addChild(gunner);
         }
 
+        // removes upgrade button & label when max has been reached.
         public RemoveWallUpgrades() {
             game.removeChild(btnUpgradeWall);
             game.removeChild(hud.lblWallUpgradeCost);
         }
 
+        // removes upgrade button & label when max has been reached.
         public RemoveClipUpgrade() {
             game.removeChild(btnUpgradeClip);
             game.removeChild(hud.lblClipUpgradeCost);
         }
 
+        // removes upgrade button & label when max has been reached.
         public RemoveReloadUpgrade() {
             game.removeChild(btnUpgradeRTime);
             game.removeChild(hud.lblReloadUpgradeCost);

@@ -1,7 +1,7 @@
 ﻿module objects {
     // HEADS UP DISPLAY - for game
     export class HUD {
-        // PUBLIC PROPERTIES
+        // PUBLIC / PRIVATE PROPERTIES
         private lblClip: objects.Label;
         private lblWall: objects.Label;
         private lblWave: objects.Label;
@@ -95,7 +95,7 @@
         }
 
         public btnPause_Click() {
-            pause = true;
+            pause = true; // keeps the play state from updating...
             game.removeChild(btnPause);
             game.addChild(btnPlay);
             config.FIRING = false;
@@ -104,9 +104,9 @@
         private btnPlay_Click() {
             config.FIRING = false;
             pause = false;
-            game.removeChild(btnPlay);
-            game.addChild(btnPause);
-            config.FIRING = false;
+            game.removeChild(btnPlay); // show play
+            game.addChild(btnPause); // remove pause
+            config.FIRING = false; // ensure bullet ammo is not wasted
         }
 
         private btnQuit_Click() {
@@ -122,42 +122,50 @@
             game.removeChild(btnReload); // removes reload button while a reload is performed.
         }
 
+
+        // upgrade wall
         private btnUpgradeWall_Click() {
             switch (play.wallType) {
                 case "wood":
                     if (money >= play.wallCost) {
                         play.UpgradeWall();
                         play.wallCost = 2500;
+                        score += 500;
                     }
                     break;
                 case "brick":
                     if (money >= play.wallCost) {
                         play.UpgradeWall();
                         play.RemoveWallUpgrades();
+                        score += 500;
                     }
                     break;
             }
         }
 
+        // decrease gunner reload time
         private btnUpgradeRTime_Click() {
             if (money >= play.reloadCost) {
                 gunner.reloadTime--;
                 money -= play.reloadCost;
                 play.reloadCost += 1000;
+                score += 500;
             }
-            if (play.reloadCost >= 5000) {
+            if (play.reloadCost >= 5000) {  // max reload upgrade is 1 second.
                 play.RemoveReloadUpgrade();
             }
         }
 
+        // increase gunner clip size
         private btnUpgradeClip_Click() {
             if (money >= play.clipCost) {
                 gunner.maxClip += 10;
                 gunner.clip = gunner.maxClip;
                 money -= play.clipCost;
                 play.clipCost += 1000;
+                score += 500;
             }
-            if (play.clipCost >= 5000) {
+            if (play.clipCost >= 10000) { // max cip size is 110 bullets.
                 play.RemoveClipUpgrade();
             }
         }

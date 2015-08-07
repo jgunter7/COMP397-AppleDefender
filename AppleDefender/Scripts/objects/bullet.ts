@@ -10,18 +10,19 @@
 
         // PUBLIC METHODS
         public init() {
-            this.direction = gunner.direction;
-            this.speed = config.BULLET_SPEED;
-            this.x = gunner.x;
+            this.direction = gunner.direction; // copy gun direction.
+            this.speed = config.BULLET_SPEED; // set predetermined bullet speed.
+            this.x = gunner.x; // starts in middle of gun, doesn't matter, moves very fast.
             this.y = gunner.y;
         }
 
         update() {
             this.CheckCollision();
-            this.calcVector();
-            this.calcPosition();
+            this.calcVector(); // gameobject
+            this.calcPosition(); // gameobject
         }
 
+        // check if a bullet is colliding.
         private CheckCollision() {
             for (var apple = 0; apple < apples.length; apple++) {
                 if (this.getTransformedBounds().intersects(apples[apple].getTransformedBounds())) {
@@ -34,6 +35,7 @@
             }    
         }
 
+        // remove a bullet
         private destroy() {
             bulletManager._destroyBullet(this);
         }

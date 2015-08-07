@@ -100,6 +100,7 @@
             this._bulletCount++;
         } // end update
 
+        // make reload sound and timeout bullet firing
         public ReloadGun() {
             const loopLength = 1; // in seconds
             var loopTimes = (gunner.reloadTime / loopLength) - 1;
@@ -110,6 +111,7 @@
             game.removeChild(btnReload);
         }
 
+        // checks to see if timeout is over so player can fire again.
         private CheckReloadDone() {
             if (60 * gunner.reloadTime <= this.waitTime) {
                 gunner.clip = gunner.maxClip;

@@ -16,16 +16,17 @@ var objects;
         }
         // PUBLIC METHODS
         Bullet.prototype.init = function () {
-            this.direction = gunner.direction;
-            this.speed = config.BULLET_SPEED;
-            this.x = gunner.x;
+            this.direction = gunner.direction; // copy gun direction.
+            this.speed = config.BULLET_SPEED; // set predetermined bullet speed.
+            this.x = gunner.x; // starts in middle of gun, doesn't matter, moves very fast.
             this.y = gunner.y;
         };
         Bullet.prototype.update = function () {
             this.CheckCollision();
-            this.calcVector();
-            this.calcPosition();
+            this.calcVector(); // gameobject
+            this.calcPosition(); // gameobject
         };
+        // check if a bullet is colliding.
         Bullet.prototype.CheckCollision = function () {
             for (var apple = 0; apple < apples.length; apple++) {
                 if (this.getTransformedBounds().intersects(apples[apple].getTransformedBounds())) {
@@ -38,6 +39,7 @@ var objects;
                 }
             }
         };
+        // remove a bullet
         Bullet.prototype.destroy = function () {
             bulletManager._destroyBullet(this);
         };
